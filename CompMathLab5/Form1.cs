@@ -4,7 +4,9 @@ namespace CompMathLab5
 {
     public partial class Form1 : Form
     {
+        private IterativeProcess _iterativeProcess = new();
         private LeftRectangles _leftRectangles;
+        private FourthOrder _fourthOrder;
 
 
 
@@ -23,8 +25,8 @@ namespace CompMathLab5
 
         private void LeftRectangles()
         {
-            _leftRectangles = new();
-            (double integral, double step) answer = _leftRectangles.ApplyMethod((double)numericLowerLimit.Value, (double)numericUpperLimit.Value, (double)numericAccuracy.Value);
+            _leftRectangles = new((double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
+            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_leftRectangles, (double)numericAccuracy.Value, 1, 2);
             textIntegral.Text = answer.integral.ToString();
             textStep.Text = answer.step.ToString();
         }
@@ -36,7 +38,10 @@ namespace CompMathLab5
 
         private void FourthOrder()
         {
-
+            _fourthOrder = new((double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
+            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_fourthOrder, (double)numericAccuracy.Value, 6, 5);
+            textIntegral.Text = answer.integral.ToString();
+            textStep.Text = answer.step.ToString();
         }
 
 

@@ -2,13 +2,13 @@
 
 namespace CompMathLab5
 {
-    public class LeftRectangles
+    public class LeftRectangles : IIntegralCalculator
     {
         private double _lowerLimit;
         private double _upperLimit;
-
-
-        private double CalculateIntegral(double step)
+        public double LowerLimit { get { return _lowerLimit; } }
+        public double UpperLimit { get { return _upperLimit; } }
+        public double CalculateIntegral(double step)
         {
             double integral = 0;
             for (double xi = _lowerLimit; xi < _upperLimit; xi += step)
@@ -17,24 +17,10 @@ namespace CompMathLab5
             integral *= step;
             return integral;
         }
-        public (double, double) ApplyMethod(double lowerLimit, double upperLimit, double accuracy)
+        public LeftRectangles(double lowerLimit, double upperLimit)
         {
             _lowerLimit = lowerLimit;
             _upperLimit = upperLimit;
-
-            int r = 2, orderAccuracy = 1;
-            double step = (upperLimit-lowerLimit)/2,      // шаг интегрирования
-                   integralCurrent = CalculateIntegral(step),  // значение интеграла с текущим шагом
-                   integralNextStep = CalculateIntegral(step/r);  //значение интеграла с шагом в r раз меньше
-
-            while(Math.Abs(integralCurrent - integralNextStep) / (Math.Pow(r,orderAccuracy)-1) >= accuracy)
-            {
-                integralCurrent = integralNextStep;
-                step /= r;
-                integralNextStep = CalculateIntegral(step/r);
-            }
-            
-            return (integralCurrent,step);
         }
     }
 }
