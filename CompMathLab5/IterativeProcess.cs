@@ -11,7 +11,6 @@ namespace CompMathLab5
 
         public (double, double) ApplyMethod(IIntegralCalculator integralCalculator, double accuracy, int orderAccuracy,int countOfPints)
         {
-
             int r = 2;
             double step = (integralCalculator.UpperLimit - integralCalculator.LowerLimit) / countOfPints,      // шаг интегрирования
                    integralCurrent = integralCalculator.CalculateIntegral(step),  // значение интеграла с текущим шагом

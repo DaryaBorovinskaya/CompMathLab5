@@ -7,9 +7,8 @@ namespace CompMathLab5
         private IterativeProcess _iterativeProcess = new();
         private LeftRectangles _leftRectangles;
         private FourthOrder _fourthOrder;
-
-
-
+        private Function _function = new();
+        private TrapezoidMethod _trapezoidMethod;
 
         public Form1()
         {
@@ -17,15 +16,11 @@ namespace CompMathLab5
             numericUpperLimit.Controls.RemoveAt(0);
             numericLowerLimit.Controls.RemoveAt(0);
             numericAccuracy.Controls.RemoveAt(0);
-
-
-
         }
-
 
         private void LeftRectangles()
         {
-            _leftRectangles = new((double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
+            _leftRectangles = new(_function,(double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
             (double integral, double step) answer = _iterativeProcess.ApplyMethod(_leftRectangles, (double)numericAccuracy.Value, 1, 2);
             textIntegral.Text = answer.integral.ToString();
             textStep.Text = answer.step.ToString();
@@ -33,22 +28,18 @@ namespace CompMathLab5
 
         private void Trapezoids()
         {
-
-        }
-
-        private void FourthOrder()
-        {
-            _fourthOrder = new((double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
-            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_fourthOrder, (double)numericAccuracy.Value, 6, 5);
+            _trapezoidMethod = new(_function, (double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
+            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_trapezoidMethod, (double)numericAccuracy.Value, 6, 4);
             textIntegral.Text = answer.integral.ToString();
             textStep.Text = answer.step.ToString();
         }
 
-
-
-        private void comboBoxMethods_SelectedIndexChanged(object sender, EventArgs e)
+        private void FourthOrder()
         {
-            
+            _fourthOrder = new(_function, (double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
+            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_fourthOrder, (double)numericAccuracy.Value, 6,4);
+            textIntegral.Text = answer.integral.ToString();
+            textStep.Text = answer.step.ToString();
         }
 
         private void buttonApplyMethod_Click(object sender, EventArgs e)
@@ -57,7 +48,7 @@ namespace CompMathLab5
                 MessageBox.Show("Неверные пределы интегрирования");
 
             else
-            { 
+            {
                 switch (comboBoxMethods.SelectedIndex)
                 {
                     case 0:
