@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace CompMathLab5
+﻿namespace CompMathLab5.CalculationIntegral
 {
     public class TrapezoidMethod : IIntegralCalculator
     {
@@ -25,7 +18,7 @@ namespace CompMathLab5
         {
             double fx = 0;
             double sum = 0;
-            for (double i =_lowerLimit + step; i < _upperLimit - step/2; i += step)
+            for (double i = _lowerLimit + step; i < _upperLimit - step / 2; i += step)
             {
                 fx += _function.MainFunction(i);
             }
