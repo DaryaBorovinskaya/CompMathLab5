@@ -1,6 +1,4 @@
-﻿
-
-namespace CompMathLab5
+﻿namespace CompMathLab5.CalculationIntegral
 {
     public class LeftRectangles : IIntegralCalculator
     {
@@ -22,7 +20,7 @@ namespace CompMathLab5
             double integral = 0;
             for (double xi = _lowerLimit; xi < _upperLimit; xi += step)
                 integral += _function.MainFunction(xi);
-                
+
             integral *= step;
             return integral;
         }

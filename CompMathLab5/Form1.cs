@@ -1,4 +1,4 @@
-
+using CompMathLab5.CalculationIntegral;
 
 namespace CompMathLab5
 {
@@ -29,7 +29,7 @@ namespace CompMathLab5
         private void Trapezoids()
         {
             _trapezoidMethod = new(_function, (double)numericLowerLimit.Value, (double)numericUpperLimit.Value);
-            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_trapezoidMethod, (double)numericAccuracy.Value, 6, 4);
+            (double integral, double step) answer = _iterativeProcess.ApplyMethod(_trapezoidMethod, (double)numericAccuracy.Value, 2, 2);
             textIntegral.Text = answer.integral.ToString();
             textStep.Text = answer.step.ToString();
         }

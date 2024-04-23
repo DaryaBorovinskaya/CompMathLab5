@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿
 
-namespace CompMathLab5
+namespace CompMathLab5.CalculationIntegral
 {
     public class FourthOrder : IIntegralCalculator
     {
@@ -14,7 +9,7 @@ namespace CompMathLab5
         private Function _function;
         public double LowerLimit { get { return _lowerLimit; } }
         public double UpperLimit { get { return _upperLimit; } }
-        
+
         public FourthOrder(Function function, double lowerLimit, double upperLimit)
         {
             _function = function;
@@ -25,7 +20,7 @@ namespace CompMathLab5
         public double CalculateIntegral(double step)
         {
             double x = LowerLimit;
-            double c0 = 2/45.0;
+            double c0 = 2 / 45.0;
             double[] w = new double[] { 7, 32, 12, 32, 7 };
             double sum = 0;
             double result = 0;
@@ -39,7 +34,8 @@ namespace CompMathLab5
                 }
                 result += sum * c0 * step;
                 sum = 0;
-                if (x + step / 2 > UpperLimit) break;                
+                if (x + step / 2 > UpperLimit) 
+                    break;
             }
             return result;
         }

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CompMathLab5.CalculationIntegral;
 
 namespace CompMathLab5
 {
     public class IterativeProcess
     {
-
-        public (double, double) ApplyMethod(IIntegralCalculator integralCalculator, double accuracy, int orderAccuracy,int countOfPints)
+        public (double, double) ApplyMethod(IIntegralCalculator integralCalculator, double accuracy, int orderAccuracy,int countOfIntervals)
         {
             int r = 2;
-            double step = (integralCalculator.UpperLimit - integralCalculator.LowerLimit) / countOfPints,      // шаг интегрирования
+            double step = (integralCalculator.UpperLimit - integralCalculator.LowerLimit) / countOfIntervals,      // шаг интегрирования
                    integralCurrent = integralCalculator.CalculateIntegral(step),  // значение интеграла с текущим шагом
                    integralNextStep = integralCalculator.CalculateIntegral(step / r);  //значение интеграла с шагом в r раз меньше
 
@@ -23,7 +18,7 @@ namespace CompMathLab5
                 integralNextStep = integralCalculator.CalculateIntegral(step / r);
             }
 
-            return (integralCurrent, step);
+            return (integralNextStep, step/r);
         }
     }
 }
